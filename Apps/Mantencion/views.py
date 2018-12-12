@@ -21,6 +21,11 @@ def cosa(request):
 def inicio(request):
     return render(request, 'templates/base.html' )
 
+def problemas(request):
+    return render(request, 'templates/problema_conexion.html' )
+
+def opciones_conectar(request):
+    return render(request, 'templates/conexion_opc.html' )
 
 
 def nueva_orden(request):
