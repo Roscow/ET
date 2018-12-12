@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block contenido %}
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+                {{form.as_ul}}
+            <button type="submit" id="btnEnviar" >Enviar</button>
+        </form>
+    </div>
+			
+{% endblock %}

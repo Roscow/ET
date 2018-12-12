@@ -1,0 +1,46 @@
+div{
+    border : solid 1px black;
+}
+
+
+.opciones div ul li{
+    display: inline-block;
+    margin-right: 5%;
+}
+
+.opciones{
+   
+    text-align: right;
+    background-color: red;
+    color: white;
+    
+}
+
+#logo{
+    align-content: center;
+    text-align: center;
+}
+#logo img{
+    width: 75%;
+    height: auto;
+}
+
+.container{
+    background-color: white;
+}
+
+#navegador{
+    background-color: red;
+    color: white;
+    text-align: center;
+    position: sticky;
+    top: 0; 
+}
+
+
+.footer{
+    background-color: grey;
+    color: white;
+    text-align: center;
+}
+

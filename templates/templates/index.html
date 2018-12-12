@@ -1,0 +1,15 @@
+
+{% extends "base.html" %}
+{% load staticfiles humanize %}
+{% block title %}Inicio{% endblock %} 
+{% block extra_head %} 
+    <link rel="stylesheet" href="{% static 'css/perfil_css.css' %}" type="text/css">	
+{% endblock %}    
+{% block perfil %}   
+    <div class="perfil">
+            <a href="#">Invitado</a>
+            <img src="{% static 'img/perfil1.png' %}" >
+    </div>
+    
+{% endblock %} 
+

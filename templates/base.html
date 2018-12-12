@@ -1,0 +1,99 @@
+
+{% load staticfiles humanize %}
+<!DOCTYPE>
+<HTML>        
+    <head>
+        <title> Nombre Empresa - {% block title %}{% endblock %}   </title>
+        <meta charset="UTF-8">          
+		<link rel="stylesheet" href="{% static 'css/flexboxgrid.css' %}" type="text/css">	
+		<link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">		
+	
+					
+		{% block extra_head %}{% endblock %}    
+    </head>
+    <body>
+		
+
+		<div class="container"> 
+				<!--opciones de parte superior -->
+			<div class="row opciones">
+				<div class="col-xs-8 col-lg-8">
+					<ul> 
+						<li>crear</li>
+						<li><a href="#">ingresar</a></li>
+						<li>salir</li>
+					</ul>
+				</div>
+
+				<div class="col-xs-4 col-lg-4">
+						{% block perfil %}{% endblock %}
+				</div>
+			</div>
+
+			<!-- imagen/gif/carrusel -->
+			<div class="row">
+				<div class="col-xs-12" id="logo" >
+					<img src="{% static 'img/1.jpg' %}" >
+				</div>
+			</div>
+
+			<!-- navegador-->
+			<div class="row" id="navegador">
+				<div class="col-xs-12 col-lg-2" >
+					<a href="{% url 'nueva_orden'%}"> nueva orden</a>
+				</div>
+
+				<div class="col-xs-12 col-lg-2">
+					administracion					
+				</div>
+
+				<div class="col-xs-12 col-lg-2">
+					asd
+				</div>
+
+				<div class="col-xs-12 col-lg-2">
+					asd
+				</div>
+
+				<div class="col-xs-12 col-lg-2">
+					asd
+				</div>
+
+				<div class="col-xs-12 col-lg-2">
+					asd
+				</div>
+			</div>
+
+			<!-- contenido-->
+			<div class="row">
+				<div class="col-xs-12 col-lg-12">
+					{% block contenido%}{% endblock %}
+
+
+				</div>
+			</div>
+
+
+			<!-- footer-->
+			<div class="row footer">
+				<div class="col-xs-12 col-lg-6">
+					trabaja con nosotros
+				</div>
+
+				<div class="col-xs-12 col-lg-6">
+					contacto
+				</div>
+
+				<div class="col-xs-12 col-lg-6">
+					redes sociales
+				</div>
+
+				<div class="col-xs-12 col-lg-6">
+					todos los derechos reservados
+				</div>
+			</div>
+		</div>	
+			
+			
+
+</HTML>
