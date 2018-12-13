@@ -6,50 +6,51 @@
 	<link rel="stylesheet" href="{% static 'css/lista.css' %}"/>
 {% endblock %}
 {% block contenido %}
-	
-	{% if user.is_authenticated %}
-		{% for i in ordenes %}
-		<div class="orden_item"> 
-			<div class="row"> 
-			<div class="col-xs-12 col-lg-2">
-				<p>folio :{{ i.folio }} </p>
-			</div>
-			<div class="col-xs-12 col-lg-2">
-					<p>ascensor id:{{ i.id_ascensor }} </p>
-			</div>
-			<div class="col-xs-12 col-lg-2">
-					<p>cliente: {{ i.cliente }} </p>
-			</div>
-			<div class="col-xs-12 col-lg-2">
-				<p>tenico: {{ i.tecnico }} </p>			
-			</div>
-			<div class="col-xs-12 col-lg-2">
-				<p>fecha: {{ i.fecha }} </p>
-			</div>
-			<div class="col-xs-12 col-lg-2">
-				<p>hora inicio:{{ i.hora_inicio }} </p>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12 col-lg-3">
-				<p>hora termino: {{ i.hora_termino }} </p>
-			</div>
-			<div class="col-xs-12 col-lg-3">
-					<p>fallas:{{ i.num_fallas }} </p>
-			</div>
-			<div class="col-xs-12 col-lg-3">
-					<p>reparaciones:{{ i.num_reparaciones }} </p>
-			</div>
-			<div class="col-xs-12 col-lg-3">
-				<p>repuestos:{{ i.num_repuestos }} </p>
-			</div>				
-		</div>
-		</div>
-	
-		{% endfor %}
-	{% else %}
-		
-	{% endif %} 
+
+
+{% if user.is_authenticated %}
+{% for i in ordenes %}
+<div class="orden_item"> 
+	<div class="row"> 
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+		<p>folio :{{ i.folio.self }} </p>
+	</div>
+	<div class="col-xs-12  col-sm-6 col-md-6 col-lg-2">
+			<p>ascensor id:{{ i.id_ascensor }} </p>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+			<p>cliente: {{ i.cliente }} </p>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+		<p>tenico: {{ i.tecnico }} </p>			
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+		<p>fecha: {{ i.fecha }} </p>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-2">
+		<p>hora inicio:{{ i.hora_inicio }} </p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+		<p>hora termino: {{ i.hora_termino }} </p>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+			<p>fallas:{{ i.num_fallas }} </p>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+			<p>reparaciones:{{ i.num_reparaciones }} </p>
+	</div>
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+		<p>repuestos:{{ i.num_repuestos }} </p>
+	</div>				
+</div>
+</div>
+
+{% endfor %}
+{% else %}
+
+{% endif %} 
 
 
 {% endblock %}

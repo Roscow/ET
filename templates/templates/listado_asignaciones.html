@@ -1,0 +1,33 @@
+
+{% extends "base.html" %}
+{% load staticfiles humanize %}
+
+
+
+{% block contenido %}
+
+    {% for i in asignaciones %}
+       
+        <div class="row tec_profile"> 
+            <div class="col-xs-12 col-lg-2">
+                <p>numero:{{ i.asignacion_id }} </p>
+            </div>
+            <div class="col-xs-12 col-lg-2">
+                    <p>Cliente:{{ i.cliente }} </p>
+            </div>
+            <div class="col-xs-12 col-lg-2">
+                    <p>tecnico: </br>{{ i.tecnico }} </p>
+            </div>
+            <div class="col-xs-12 col-lg-2">
+                <p>Estado:{{ i.Estado }} </p>
+            </div>
+            {% ifequal i.Estado "En tramite"  %}
+            <div class="col-xs-12 col-lg-2">                
+                    <a href="#" > Crear orden </a>                             
+            </div>
+            {% endifequal %}
+        </div>
+        
+
+    {% endfor %}
+{% endblock %}

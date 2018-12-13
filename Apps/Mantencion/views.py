@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from  django.http import HttpResponse
 from .forms import nuevaOrdenForm
-from .models import Orden, Tecnico
+from .models import Orden, Tecnico, Asignacion
 from django.contrib.auth import logout
 
 
@@ -54,3 +54,20 @@ def listado_ordenes(request):
     contexto = {'ordenes':ordenes_list}
     return render(request, 'templates/listado_ordenes.html', contexto)
     
+
+#hacer filtro por tecnico
+def listado_asignaciones(request):
+    asignaciones_list = Asignacion.objects.all()  
+    contexto = {'asignaciones':asignaciones_list}
+    return render(request, 'templates/listado_asignaciones.html', contexto)
+
+
+def listado_asignaciones2(request, user):
+     if user == "admin":
+          asignaciones_list = Asignacion.objects.all()  
+          contexto = {'asignaciones':asignaciones_list}
+     else:
+          asignaciones_list = Asignacion.objects.filter(tecnico=user)  
+          contexto = {'asignaciones':asignaciones_list}
+     return render(request, 'templates/listado_asignaciones.html', contexto)
+

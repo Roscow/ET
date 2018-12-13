@@ -29,11 +29,24 @@ class Ascensor(models.Model):
     def __str__(self):
         return self.id_ascensor
 
+
+
+
+class Asignacion(models.Model):
+    asignacion_id = models.CharField(primary_key=True, max_length=50) 
+    cliente = models.ForeignKey(Cliente , on_delete=models.CASCADE)
+    tecnico = models.ManyToManyField(Tecnico)
+    Estado =  models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.asignacion_id
+
+
 class Orden(models.Model):
-    folio = models.CharField(primary_key=True, max_length=50)
     id_ascensor = models.ForeignKey(Ascensor, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente , on_delete=models.CASCADE)
     tecnico = models.ManyToManyField(Tecnico)
+    folio = models.OneToOneField(Asignacion, primary_key=True, on_delete=models.CASCADE)
     fecha = models.DateField(blank=True, null=False)
     hora_inicio = models.CharField(max_length=50)
     hora_termino =  models.CharField(max_length=50)
