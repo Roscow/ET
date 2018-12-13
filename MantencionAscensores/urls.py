@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.contrib.auth import logout
+
 #from django.urls import path 
 
 
@@ -22,5 +24,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^$', include ('Apps.Mantencion.urls')),
     url(r'^', include ('Apps.Mantencion.urls')),
-
+    url(r'^salir$', logout, name="salir"),     
 ]

@@ -5,62 +5,51 @@
 {% block extra_head %}
 	<link rel="stylesheet" href="{% static 'css/lista.css' %}"/>
 {% endblock %}
-{% block content%}
-	<DIV id="formulario" class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+{% block contenido %}
+	
+	{% if user.is_authenticated %}
+		{% for i in ordenes %}
+		<div class="orden_item"> 
+			<div class="row"> 
+			<div class="col-xs-12 col-lg-2">
+				<p>folio :{{ i.folio }} </p>
+			</div>
+			<div class="col-xs-12 col-lg-2">
+					<p>ascensor id:{{ i.id_ascensor }} </p>
+			</div>
+			<div class="col-xs-12 col-lg-2">
+					<p>cliente: {{ i.cliente }} </p>
+			</div>
+			<div class="col-xs-12 col-lg-2">
+				<p>tenico: {{ i.tecnico }} </p>			
+			</div>
+			<div class="col-xs-12 col-lg-2">
+				<p>fecha: {{ i.fecha }} </p>
+			</div>
+			<div class="col-xs-12 col-lg-2">
+				<p>hora inicio:{{ i.hora_inicio }} </p>
+			</div>
+		</div>
 		<div class="row">
-		{% for post in posts %}
-			<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-				<div class="articlebox">
-					<div class="nom">
-						{{post.nombre}}
-					</div>
-				
-					<div style="background-image: url('{{post.imagen1.url}}');width:100%;padding-bottom:100%;overflow: hidden;background-position:35% 35%;
-		background-size: cover; border-radius:0px; margin:0px"></div>
-					<div class="info" >
-					
-						<div class="row">
-							<div>
-							{{post.raza}}
-							</div>
-							<div class="size" style="text-align:right;">
-								{% if post.tamaño == 'm' %}
-									<span>Mediano</span>
-								{% elif post.tamaño == 'p' %}
-									<span>Pequeño</span>
-
-								{% else %}
-									<span>Grande</span>
-								{% endif %}
-							
-							</div>
-							<div style="float:right;">
-								{% if post.sexo == 'H' %}
-									<span style="color:pink">♀</span>
-								{% else %}
-									<span style="color:blue">♂</span>
-																	
-								{% endif %}
-							</div>
-						</div>	
-						<div class="row">
-							
-							{% if user.is_authenticated %}
-							<a class="adoptar" href="{% url 'adoptarperrito'  id=post.id %}">
-								ver detalles
-							</a>
-							{% else %}
-							<a class="adoptar" href="{% url 'adoptarperrito'  id=post.id %}">
-								ver detalles
-							</a>
-							{% endif %}
-
-						</div>
-					
-					</div>
-				</div>
+			<div class="col-xs-12 col-lg-3">
+				<p>hora termino: {{ i.hora_termino }} </p>
+			</div>
+			<div class="col-xs-12 col-lg-3">
+					<p>fallas:{{ i.num_fallas }} </p>
+			</div>
+			<div class="col-xs-12 col-lg-3">
+					<p>reparaciones:{{ i.num_reparaciones }} </p>
+			</div>
+			<div class="col-xs-12 col-lg-3">
+				<p>repuestos:{{ i.num_repuestos }} </p>
 			</div>				
+		</div>
+		</div>
+	
 		{% endfor %}
-		</div>		
-	</DIV>
+	{% else %}
+		
+	{% endif %} 
+
+
 {% endblock %}

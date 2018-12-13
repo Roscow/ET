@@ -6,10 +6,18 @@
     <link rel="stylesheet" href="{% static 'css/perfil_css.css' %}" type="text/css">	
 {% endblock %}    
 {% block perfil %}   
-    <div class="perfil">
-            <a href="#">Invitado</a>
-            <img src="{% static 'img/perfil1.png' %}" >
-    </div>
+    
+{% if user.is_authenticated %}
+<div class="perfil">
+    <a href="#">{{ user }}</a>
+    <img src="{% static 'img/perfil1.png' %}" >
+</div>
+{% else %}
+<div class="perfil">
+    <a href="#">Invitado</a>
+    <img src="{% static 'img/perfil1.png' %}" >
+</div>
+{% endif %}
     
 {% endblock %} 
 

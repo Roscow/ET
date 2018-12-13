@@ -1,0 +1,23 @@
+
+{% extends "base.html" %}
+{% load staticfiles humanize %}
+
+
+
+{% block contenido %}
+
+    {% for i in tecnicos %}
+        <div class="row tec_profile"> 
+            <div class="col-xs-12 col-lg-3">
+                <p>{{ i.nombre }} </p>
+            </div>
+            <div class="col-xs-12 col-lg-3">
+                    <p>{{ i.correo }} </p>
+            </div>
+            <div class="col-xs-12 col-lg-3">
+                    <p>{{ i.id }} </p>
+            </div>
+        </div>
+        
+    {% endfor %}
+{% endblock %}

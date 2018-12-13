@@ -24,7 +24,7 @@ class nuevaOrdenForm(forms.ModelForm):
             'folio':forms.TextInput(),
             'id_ascensor':forms.Select(),
             'cliente':forms.Select(),
-            'tecnico':forms.Select(),
+            'tecnico':forms.CheckboxSelectMultiple(),
             'fecha':forms.SelectDateWidget(years=range(datetime.datetime.now().year - 100, datetime.datetime.now().year)),
             'hora_inicio':forms.TextInput(),
             'hora_termino':forms.TextInput(),

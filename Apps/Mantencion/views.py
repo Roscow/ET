@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from  django.http import HttpResponse
 from .forms import nuevaOrdenForm
-from .models import Orden
+from .models import Orden, Tecnico
+from django.contrib.auth import logout
+
+
 
 # Create your views here.
 
@@ -38,3 +41,16 @@ def nueva_orden(request):
      else:
         form = nuevaOrdenForm()
      return render(request, 'templates/nueva_orden.html', {'form': form})
+
+
+def listado_tecnicos(request):
+    tecnicos_list = Tecnico.objects.all()  
+    contexto = {'tecnicos':tecnicos_list}
+    return render(request, 'templates/listado_tecnicos.html', contexto)
+    
+
+def listado_ordenes(request):
+    ordenes_list = Orden.objects.all()  
+    contexto = {'ordenes':ordenes_list}
+    return render(request, 'templates/listado_ordenes.html', contexto)
+    

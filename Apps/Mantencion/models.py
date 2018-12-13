@@ -33,7 +33,7 @@ class Orden(models.Model):
     folio = models.CharField(primary_key=True, max_length=50)
     id_ascensor = models.ForeignKey(Ascensor, on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente , on_delete=models.CASCADE)
-    tecnico = models.ForeignKey(Tecnico, on_delete=models.CASCADE)
+    tecnico = models.ManyToManyField(Tecnico)
     fecha = models.DateField(blank=True, null=False)
     hora_inicio = models.CharField(max_length=50)
     hora_termino =  models.CharField(max_length=50)

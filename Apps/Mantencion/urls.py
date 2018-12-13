@@ -4,6 +4,7 @@ from Apps.Mantencion.views import index, prueba,cosa,inicio, nueva_orden, proble
 from . import views
 
 
+
 urlpatterns = [
     url(r'^prueba', prueba ),
     url(r'^$', index  ),
@@ -12,4 +13,8 @@ urlpatterns = [
     url(r'^problemas', views.problemas, name='problemas'),
     url(r'^conexion', views.opciones_conectar, name='conexion_opc'),
     url(r'^api-auth/', include('rest_framework.urls')),
+    url(r'^listado_tecnico', views.listado_tecnicos, name='listado_tecnicos'),
+    url(r'^listado_ordenes', views.listado_ordenes, name='listado_ordenes'),
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
+
 ]
