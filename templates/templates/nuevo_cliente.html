@@ -18,71 +18,55 @@ width:50px;
 		<form method="POST">
 			{% csrf_token %}
 			<div class="htabla col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align:center;font-size:24px"> 
-			Nueva orden para {{cliente.nombre}}
+			Ingresar nuevo cliente
 			</div>
 			<div>
 				<div class="row">
 					<div class="col-xs-6 col-lg-6">
-						Fecha
+						Nombre
 					</div>
 					<div class="col-xs-6 col-lg-6">
-						{{form.fecha}}
+						{{form.nombre}}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6 col-lg-6">
-						Hora inicio
+						Dirección
 					</div>
 					<div class="col-xs-6 col-lg-6">
-						{{form.hora_inicio}}
+						{{form.direccion}}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6 col-lg-6">
-						Hora término
+						Ciudad
 					</div>
 					<div class="col-xs-6 col-lg-6">
-						{{form.hora_termino}}
+						{{form.ciudad}}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6 col-lg-6">
-						ID Ascensor
+						Comuna
 					</div>
 					<div class="col-xs-6 col-lg-6">
-						{{form.ascensor_id}}
+						{{form.comuna}}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6 col-lg-6">
-						Modelo ascensor
+						Teléfono
 					</div>
 					<div class="col-xs-6 col-lg-6">
-						{{form.ascensor_modelo}}
+						{{form.telefono}}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6 col-lg-6">
-						Fallas
+						Correo
 					</div>
 					<div class="col-xs-6 col-lg-6">
-						{{form.fallas}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6 col-lg-6">
-						Reparaciones
-					</div>
-					<div class="col-xs-6 col-lg-6">
-						{{form.reparaciones}}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6 col-lg-6">
-						Repuestos
-					</div>
-					<div class="col-xs-6col-lg-6">
-						{{form.repuestos}}
+						{{form.correo}}
 					</div>
 				</div>
 				<div class="col-xs-6 col-lg-6">
@@ -90,13 +74,6 @@ width:50px;
 				</div>
 			</form>	
 		</div>
-		{% for i in asignaciones %}
-			{% for x in clientes %}
-				{% if i.id == x.id %}
-				
-				{% endif %}
-			{% endfor %}
-		{% endfor %}
 	</div>
 	
 	

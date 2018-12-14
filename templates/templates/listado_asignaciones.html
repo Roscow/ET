@@ -4,30 +4,64 @@
 
 
 
-{% block contenido %}
+{% block content %}
+<div class="row">
+	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"> 
 
-    {% for i in asignaciones %}
-       
-        <div class="row tec_profile"> 
-            <div class="col-xs-12 col-lg-2">
-                <p>numero:{{ i.asignacion_id }} </p>
-            </div>
-            <div class="col-xs-12 col-lg-2">
-                    <p>Cliente:{{ i.cliente }} </p>
-            </div>
-            <div class="col-xs-12 col-lg-2">
-                    <p>tecnico: </br>{{ i.tecnico }} </p>
-            </div>
-            <div class="col-xs-12 col-lg-2">
-                <p>Estado:{{ i.Estado }} </p>
-            </div>
-            {% ifequal i.Estado "En tramite"  %}
-            <div class="col-xs-12 col-lg-2">                
-                    <a href="#" > Crear orden </a>                             
-            </div>
-            {% endifequal %}
-        </div>
-        
+	</div>
+	<div class="tec_profile col-xs-10 col-sm-10 col-md-10 col-lg-10"> 
+		<div class="row htabla col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+			<div class="col-xs-2 col-lg-2">
+				Nombre
+			</div>
+			<div class="col-xs-2 col-lg-2">
+				Ciudad
+			</div>
+			<div class="col-xs-2 col-lg-2">
+				Comuna
+			</div>
+			<div class="col-xs-2 col-lg-2">
+				Dirección
+			</div>
+			<div class="col-xs-2 col-lg-2">
+				Teléfono
+			</div>
+			<div class="col-xs-2 col-lg-2">
+				
+			</div>
+		</div>
+		{% for i in asignaciones %}
+			{% for x in clientes %}
+				{% if i.id == x.id %}
+				<div class="row hentrada col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+					<div class="col-xs-2 col-lg-2">
+						{{ x.nombre }} 
+					</div>
+					<div class="col-xs-2 col-lg-2">
+						{{ x.ciudad }} 
+					</div>
+					<div class="col-xs-2 col-lg-2">
+						{{ x.comuna }} 
+					</div>
+					<div class="col-xs-2 col-lg-2">
+						{{ x.direccion }} 
+					</div>
+					<div class="col-xs-2 col-lg-2">
+						{{ x.telefono }} a
+					</div>
+					<div class="col-xs-2 col-lg-2">
+						<a href="{% url 'nueva_orden' id=x.id %}">nueva orden</a>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}
+		{% endfor %}
+	</div>
+	
+	
+	<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"> 
 
-    {% endfor %}
+	</div>
+</div>
+    
 {% endblock %}

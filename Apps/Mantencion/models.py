@@ -4,55 +4,54 @@ from django.utils import timezone
 
 
 class Cliente(models.Model):
-    nombre = models.CharField(primary_key=True,max_length=50)
-    direccion = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=50)
+    direccion = models.CharField(max_length=50)
     ciudad = models.CharField(max_length=50)
     comuna = models.CharField(max_length=50)
-    telefono = models.CharField(max_length=16)
+    telefono = models.IntegerField()
     correo= models.EmailField(max_length=60)
 
     def __str__(self):
         return self.nombre
 
-class Tecnico(models.Model):
-    correo = models.EmailField(max_length=60)
-    contraseña = models.CharField(null=False, max_length=20)
-    nombre = models.CharField(primary_key=True, max_length=50)
-
-    def __str__(self):
-        return self.nombre
-
+'''
 class Ascensor(models.Model):
     id_ascensor = models.CharField(primary_key=True, max_length=50)
     modelo = models.CharField(null=False, max_length=20)
     
     def __str__(self):
         return self.id_ascensor
-
-
+'''
 
 
 class Asignacion(models.Model):
-    asignacion_id = models.CharField(primary_key=True, max_length=50) 
+    tecnico = models.ForeignKey('auth.User',on_delete=models.CASCADE)
     cliente = models.ForeignKey(Cliente , on_delete=models.CASCADE)
-    tecnico = models.ManyToManyField(Tecnico)
-    Estado =  models.CharField(max_length=50)
+	
+    class Meta:
+        verbose_name_plural='Asignaciones'
+        verbose_name='Asignación'
 
     def __str__(self):
-        return self.asignacion_id
+        return "Tecnico: " + self.tecnico.username + " / " + "Cliente: " + self.cliente.__str__()
 
 
 class Orden(models.Model):
-    id_ascensor = models.ForeignKey(Ascensor, on_delete=models.CASCADE)
-    cliente = models.ForeignKey(Cliente , on_delete=models.CASCADE)
-    tecnico = models.ManyToManyField(Tecnico)
-    folio = models.OneToOneField(Asignacion, primary_key=True, on_delete=models.CASCADE)
+    tecnico = models.ForeignKey('auth.User', on_delete=models.PROTECT,blank=True)
+    cliente = models.ForeignKey(Cliente, on_delete=models.PROTECT,blank=True)
+	
     fecha = models.DateField(blank=True, null=False)
-    hora_inicio = models.CharField(max_length=50)
-    hora_termino =  models.CharField(max_length=50)
-    num_fallas = models.IntegerField()
-    num_reparaciones = models.IntegerField()
-    num_repuestos = models.IntegerField()
+    hora_inicio = models.TimeField(null=False)
+    hora_termino =  models.TimeField(null=False)
+    ascensor_id = models.CharField(max_length=50)
+    ascensor_modelo = models.CharField(max_length=50,null=False)
+    fallas = models.TextField(max_length=100)
+    reparaciones = models.TextField(max_length=100)
+    repuestos = models.TextField(max_length=100)
+
+    class Meta:
+        verbose_name_plural='Órdenes'
+        verbose_name='Orden'
 
     def __str__(self):
-        return self.folio
+        return self.fecha.__str__() + " " + self.id.__str__()

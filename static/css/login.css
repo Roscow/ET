@@ -1,0 +1,52 @@
+
+.lg2{
+	border-radius: 10px;
+    box-shadow: 3px  3px gray;
+    margin: 10px;
+    border : 1px solid black;
+	
+	text-align:center;
+	padding:14px;
+}
+
+.desc{
+	font-size:13px;
+	
+}
+
+.he{
+	font-size:30px;
+	
+}
+
+input {
+	width:170px;
+	
+}
+button {
+	width:170px;
+	
+}
+
+
+.in{
+	padding:10px;
+	border:0px solid black;
+	display:inline-block;
+	margin:1px;
+	width:150px;
+	font-size:12px;
+	font-weight:normal;
+	letter-spacing: 0.3px;
+}
+
+.in.fb {
+	background-color:rgb(59, 89, 152);
+	color:white;
+}
+
+.in.gh {
+	background-color:rgb(40, 40, 40);
+	color:white;
+	
+}

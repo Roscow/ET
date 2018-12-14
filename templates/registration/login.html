@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}"/>
+{% endblock %}
+{% block content%}
+<div class='row'>
+	<div class='lg1 col-xs-1 col-sm-2 col-md-3 col-lg-3'>
+	</div>
+	<div class='lg2 col-xs-10 col-sm-8 col-md-6 col-lg-6'>
+		<div class='he'>
+		Bienvenido
+		</div>
+		<div class='desc'>
+		Por favor, incia sesión para continuar.</br></br>
+		
+		</div>
+		
+		<div id="formulario-login">
+		  <form method="post">
+			{% csrf_token %}
+			{{ form.username.label }}</br>
+			{{ form.username }}</br>
+			{{ form.password.label }}</br>
+			{{ form.password }}</br></br>
+			
+			<button type="submit">Ingresar</button><br>
+			{{ form.errors }}
+		  </form>
+		  <br>
+		  <p><strong>O también puedes</strong></p>
+		  <a class="in gh" href="{% url 'social:begin' 'github' %}">Ingresar con <b>GitHub</b></a><br>
+		  <a class="in fb" href="{% url 'social:begin' 'facebook' %}">Ingresar con <b>Facebook</b></a><br>
+		</div>
+
+	</div>
+	<div class='lg3 col-xs-1 col-sm-2 col-md-3 col-lg-3'>
+	
+	</div>
+</div>
+	
+{% endblock %}

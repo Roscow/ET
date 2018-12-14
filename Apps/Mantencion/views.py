@@ -1,73 +1,61 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from  django.http import HttpResponse
-from .forms import nuevaOrdenForm
-from .models import Orden, Tecnico, Asignacion
+from .forms import nuevaOrdenForm,nuevoClienteForm
+from .models import Orden, Asignacion, Cliente
 from django.contrib.auth import logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required,permission_required,user_passes_test
 
 
-
-# Create your views here.
-
-
-def prueba(request):
-    return HttpResponse("probando")
-
-
-def index(request):
-     return render(request, 'templates/index.html' )
-
-
-def cosa(request):
-    return HttpResponse("cosa")
-
-
-def inicio(request):
-    return render(request, 'templates/base.html' )
-
-def problemas(request):
-    return render(request, 'templates/problema_conexion.html' )
-
-def opciones_conectar(request):
-    return render(request, 'templates/conexion_opc.html' )
-
-
-def nueva_orden(request):
-     if request.method =="POST":
-        form = nuevaOrdenForm(request.POST)
-        if form.is_valid():
-            Orden = form.save(commit=True)
-            Orden.save()
-            return redirect('/admin/')
-     else:
+@login_required
+def nueva_orden(request,id):
+    if request.method =="POST":
+         form = nuevaOrdenForm(request.POST)
+         if form.is_valid():
+             Orden = form.save(commit=False)
+             Orden.tecnico = request.user
+             Orden.cliente = get_object_or_404(Cliente,id=id)
+             Orden.save()
+             return redirect('listado_ordenes')
+    else:
         form = nuevaOrdenForm()
-     return render(request, 'templates/nueva_orden.html', {'form': form})
+    asignaciones_list = Asignacion.objects.filter(tecnico = request.user)
+    cliente = get_object_or_404(Cliente,id=id)
+    return render(request, 'templates/nueva_orden.html', {'form': form,'asignaciones':asignaciones_list,'cliente':cliente})
+	
 
-
+@login_required
 def listado_tecnicos(request):
-    tecnicos_list = Tecnico.objects.all()  
-    contexto = {'tecnicos':tecnicos_list}
-    return render(request, 'templates/listado_tecnicos.html', contexto)
-    
-
+    tecnicos_list = User.objects.filter(is_staff=True, is_superuser=False)
+    return render(request, 'templates/listado_tecnicos.html', {'tecnicos': tecnicos_list})
+  
+@login_required
 def listado_ordenes(request):
-    ordenes_list = Orden.objects.all()  
-    contexto = {'ordenes':ordenes_list}
-    return render(request, 'templates/listado_ordenes.html', contexto)
+    ordenes_list = Orden.objects.filter(tecnico = request.user)  
+    return render(request, 'templates/listado_ordenes.html', {'ordenes':ordenes_list})
     
 
 #hacer filtro por tecnico
+@login_required
 def listado_asignaciones(request):
-    asignaciones_list = Asignacion.objects.all()  
-    contexto = {'asignaciones':asignaciones_list}
-    return render(request, 'templates/listado_asignaciones.html', contexto)
+     asignaciones_list = Asignacion.objects.filter(tecnico = request.user)
+     clientes_list = Cliente.objects.all()
+     return render(request, 'templates/listado_asignaciones.html', {'asignaciones':asignaciones_list,'clientes':clientes_list})
 
-
-def listado_asignaciones2(request, user):
-     if user == "admin":
-          asignaciones_list = Asignacion.objects.all()  
-          contexto = {'asignaciones':asignaciones_list}
-     else:
-          asignaciones_list = Asignacion.objects.filter(tecnico=user)  
-          contexto = {'asignaciones':asignaciones_list}
-     return render(request, 'templates/listado_asignaciones.html', contexto)
-
+@user_passes_test(lambda u: u.is_superuser)
+def nuevo_cliente(request):
+    if request.method =="POST":
+        form = nuevoClienteForm(request.POST)
+        if form.is_valid():
+            x = form.save(commit=True)
+            x.save()
+            return redirect('/')
+    else:
+        form = nuevoClienteForm()
+    return render(request, 'templates/nuevo_cliente.html', {'form': form})
+	 
+@user_passes_test(lambda u: u.is_superuser)
+def todas_ordenes(request):
+    ordenes_list = Orden.objects.all()
+    return render(request, 'templates/todas_ordenes.html', {'ordenes':ordenes_list})
+    
